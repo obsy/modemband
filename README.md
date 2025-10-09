@@ -138,3 +138,15 @@ root@MiFi:~# modemband.sh getbands
 ```
 
 See also [description in Polish](https://eko.one.pl/?p=openwrt-modemband).
+
+# Precompiled packages for stable release
+
+https://dl.eko.one.pl/packages/opkg/all/
+
+# Precompiled packages for development snapshots
+
+https://dl.eko.one.pl/packages/apk/all/
+
+# The project is used in
+- [easyconfig](https://eko.one.pl/?p=easyconfig) - [src](https://github.com/obsy/easyconfig)
+- luci-app-modemband - [src](https://github.com/4IceG/luci-app-modemband)
