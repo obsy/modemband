@@ -19,6 +19,7 @@ Supported devices:
 - Quectel EG06-E
 - Quectel EG12-EA
 - Quectel EG18-EA
+- Quectel EG120K-EA
 - Quectel EM12-G
 - Quectel EM12G-MSFT
 - Quectel EM160R-GL
