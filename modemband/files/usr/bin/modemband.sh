@@ -303,20 +303,58 @@ setbands5gsa() {
 	echo "Unsupported"
 }
 
+getdevicepath() {
+	devname="$(basename $1)"
+	case "$devname" in
+		'wwan'*'at'*)
+			devpath="$(readlink -f /sys/class/wwan/$devname/device)"
+			echo ${devpath%/*/*/*}
+			;;
+		'ttyACM'*)
+			devpath="$(readlink -f /sys/class/tty/$devname/device)"
+			echo ${devpath%/*}
+			;;
+		'tty'*)
+			devpath="$(readlink -f /sys/class/tty/$devname/device)"
+			echo ${devpath%/*/*}
+			;;
+		*)
+			devpath="$(readlink -f /sys/class/usbmisc/$devname/device)"
+			echo ${devpath%/*}
+			;;
+	esac
+}
 
 RES="/usr/share/modemband"
 
-_DEVS=$(awk '{gsub("="," ");
-if ($0 ~ /Bus.*Lev.*Prnt.*Port.*/) {T=$0}
-if ($0 ~ /Vendor.*ProdID/) {idvendor[T]=$3; idproduct[T]=$5}
-if ($0 ~ /Product/) {product[T]=$3}}
-END {for (idx in idvendor) {printf "%s%s\n%s%s%s\n", idvendor[idx], idproduct[idx], idvendor[idx], idproduct[idx], product[idx]}}' /sys/kernel/debug/usb/devices)
-for _DEV in $_DEVS; do
-	if [ -e "$RES/$_DEV" ]; then
-		. "$RES/$_DEV"
-		break
+_DEVICE=""
+if [ -n "$DEVICE" ]; then
+	USBPATH=$(getdevicepath $DEVICE)
+	if [ -n "$USBPATH" ]; then
+		VID=$(cat ${USBPATH}/idVendor)
+		PID=$(cat ${USBPATH}/idProduct)
+		PROD=$(cat ${USBPATH}/product)
+		if [ -e "$RES/${VID}${PID}${PROD}" ]; then
+			. "$RES/${VID}${PID}${PROD}"
+			_DEVICE=$DEVICE
+		elif [ -e "$RES/${VID}${PID}" ]; then
+			. "$RES/${VID}${PID}"
+			_DEVICE=$DEVICE
+		fi
 	fi
-done
+else
+	_DEVS=$(awk '{gsub("="," ");
+	if ($0 ~ /Bus.*Lev.*Prnt.*Port.*/) {T=$0}
+	if ($0 ~ /Vendor.*ProdID/) {idvendor[T]=$3; idproduct[T]=$5}
+	if ($0 ~ /Product/) {product[T]=$3}}
+	END {for (idx in idvendor) {printf "%s%s\n%s%s%s\n", idvendor[idx], idproduct[idx], idvendor[idx], idproduct[idx], product[idx]}}' /sys/kernel/debug/usb/devices)
+	for _DEV in $_DEVS; do
+		if [ -e "$RES/$_DEV" ]; then
+			. "$RES/$_DEV"
+			break
+		fi
+	done
+fi
 
 if [ -z "$_DEVICE" ]; then
 	if [ "x$1" = "xjson" ]; then
@@ -325,11 +363,6 @@ if [ -z "$_DEVICE" ]; then
 		echo "No supported modem was found, quitting..."
 	fi
 	exit 0
-else
-	_DEVICE1=$(uci -q get 3ginfo.@3ginfo[0].device)
-	if [ -n "$_DEVICE1" ]; then
-		_DEVICE=$_DEVICE1
-	fi
 fi
 if [ ! -e "$_DEVICE" ]; then
 	if [ "x$1" = "xjson" ]; then
@@ -461,6 +494,9 @@ case $1 in
 		echo " $0 getinfo"
 		echo " $0 json"
 		echo " $0 help"
+		echo ""
+		echo "Manually specifying interface:"
+		echo " DEVICE=/dev/ttyUSB2 $0 getinfo"
 		echo ""
 		echo "for LTE modem"
 		echo " $0 getsupportedbands"
