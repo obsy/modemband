@@ -1,7 +1,7 @@
 #!/bin/sh
 
 #
-# (c) 2022-2024 Cezary Jackiewicz <cezary@eko.one.pl>
+# (c) 2022-2025 Cezary Jackiewicz <cezary@eko.one.pl>
 #
 
 hextobands() {
@@ -116,6 +116,9 @@ bandtxt() {
 	"88") echo "$BAND: FDD  410 MHz";;
 	"103") echo "$BAND: FDD  700 MHz";;
 	"106") echo "$BAND: FDD  900 MHz";;
+	"107") echo "$BAND: SDO  600 MHz";;
+	"108") echo "$BAND: SDO  500 MHz";;
+	"111") echo "$BAND: FDD 1800 MHz";;
 	esac
 }
 
@@ -172,6 +175,8 @@ bandtxt5g() {
 	"84") echo "$BAND: SUL 2100 MHz";;
 	"85") echo "$BAND: FDD  700 MHz";;
 	"86") echo "$BAND: SUL 1700 MHz";;
+	"87") echo "$BAND: FDD  400 MHz";;
+	"88") echo "$BAND: FDD  400 MHz";;
 	"89") echo "$BAND: SUL  850 MHz";;
 	"90") echo "$BAND: TDD 2500 MHz";;
 	"91") echo "$BAND: FDD  800/1500 MHz";;
@@ -188,6 +193,7 @@ bandtxt5g() {
 	"102") echo "$BAND: TDD 6200 MHz";;
 	"104") echo "$BAND: TDD 6700 MHz";;
 	"105") echo "$BAND: FDD  600 MHz";;
+	"110") echo "$BAND: FDD 1400 MHz";;
 	"257") echo "$BAND: 28 GHz";;
 	"258") echo "$BAND: 26 GHz";;
 	"259") echo "$BAND: 41 GHz";;
@@ -329,6 +335,7 @@ RES="/usr/share/modemband"
 
 _DEVICE=""
 if [ -n "$DEVICE" ]; then
+	# check the DEVICE environment variable
 	USBPATH=$(getdevicepath $DEVICE)
 	if [ -n "$USBPATH" ]; then
 		VID=$(cat ${USBPATH}/idVendor)
@@ -343,6 +350,7 @@ if [ -n "$DEVICE" ]; then
 		fi
 	fi
 else
+	# find first supported device
 	_DEVS=$(awk '{gsub("="," ");
 	if ($0 ~ /Bus.*Lev.*Prnt.*Port.*/) {T=$0}
 	if ($0 ~ /Vendor.*ProdID/) {idvendor[T]=$3; idproduct[T]=$5}

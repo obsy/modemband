@@ -55,6 +55,9 @@ Available commands:
  /usr/bin/modemband.sh json
  /usr/bin/modemband.sh help
 
+Manually specifying interface:
+ DEVICE=/dev/ttyUSB2 /usr/bin/modemband.sh getinfo
+
 for LTE modem
  /usr/bin/modemband.sh getsupportedbands
  /usr/bin/modemband.sh getsupportedbandsext
