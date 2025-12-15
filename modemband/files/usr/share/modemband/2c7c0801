@@ -4,7 +4,8 @@ _DEFAULT_5GNSA_BANDS="1 2 3 5 7 8 12 13 14 18 20 25 26 28 29 30 38 40 41 48 66 7
 _DEFAULT_5GSA_BANDS="1 2 3 5 7 8 12 13 14 18 20 25 26 28 29 30 38 40 41 48 66 70 71 75 76 77 78 79"
 
 getinfo() {
-	echo "Quectel RM520N-GL"
+	T=$(sms_tool -d $_DEVICE at AT+CGMM | tr -s '\n' | xargs)
+	echo "Quectel $T"
 }
 
 # +QNWPREFCFG: "lte_band",1:3:7:8:20:28:38
