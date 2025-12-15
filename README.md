@@ -8,6 +8,7 @@ Supported devices:
 - Fibocom L850-GL in mbim mode
 - Fibocom L860-GL
 - Fibocom L860-GL-16
+- Foxconn T99W175 (generic)
 - HP lt4112 (Huawei ME906E)
 - HP lt4132 LTE/HSPA+ 4G Module (Huawei ME906s-158)
 - HP lt4220 (Foxconn T77W676)
@@ -32,6 +33,7 @@ Supported devices:
 - Quectel RM502Q-GL
 - Quectel RM505Q-AE
 - Quectel RM520N-GL
+- Quectel RM521F-GL
 - Quectel RM551E-GL
 - Sierra Wireless EM7455/MC7455/DW5811e
 - SIMCOM SIM8200EA-M2
