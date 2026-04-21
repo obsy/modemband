@@ -29,6 +29,7 @@ Supported devices:
 - Quectel RG502Q-EA
 - Quectel RM500Q-GL
 - Quectel RM500U-CNV
+- Quectel RM500U-EA
 - Quectel RM500Q-AE
 - Quectel RM502Q-AE
 - Quectel RM502Q-GL
