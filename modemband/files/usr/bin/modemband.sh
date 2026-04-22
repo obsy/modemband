@@ -355,7 +355,7 @@ else
 	if ($0 ~ /Bus.*Lev.*Prnt.*Port.*/) {T=$0}
 	if ($0 ~ /Vendor.*ProdID/) {idvendor[T]=$3; idproduct[T]=$5}
 	if ($0 ~ /Product/) {product[T]=$3}}
-	END {for (idx in idvendor) {printf "%s%s\n%s%s%s\n", idvendor[idx], idproduct[idx], idvendor[idx], idproduct[idx], product[idx]}}' /sys/kernel/debug/usb/devices)
+	END {for (idx in idvendor) {printf "%s%s%s\n%s%s\n", idvendor[idx], idproduct[idx], product[idx], idvendor[idx], idproduct[idx]}}' /sys/kernel/debug/usb/devices)
 	for _DEV in $_DEVS; do
 		if [ -e "$RES/$_DEV" ]; then
 			. "$RES/$_DEV"
