@@ -3,6 +3,7 @@ Setting LTE/5G NSA/5G SA bands for selected modems.
 Supported devices:
 - BroadMobi BM806U
 - Dell DW5821e Snapdragon X20 LTE (Foxconn T77W968)
+- Fibocom FG621-EA
 - Fibocom FM350-GL
 - Fibocom L850-GL
 - Fibocom L850-GL in mbim mode
@@ -147,13 +148,13 @@ root@MiFi:~# modemband.sh getbands
 
 See also [description in Polish](https://eko.one.pl/?p=openwrt-modemband).
 
-# Precompiled packages for stable release
+# Precompiled packages (ipk)
 
 https://dl.eko.one.pl/packages/opkg/all/
 
-# Precompiled packages for development snapshots
+# Precompiled packages (apk)
 
-https://dl.eko.one.pl/packages/apk/all/
+https://dl.eko.one.pl/packages/apk/noarch/
 
 # The project is used in
 - [easyconfig](https://eko.one.pl/?p=easyconfig) - [src](https://github.com/obsy/easyconfig)
