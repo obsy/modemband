@@ -3,6 +3,7 @@ Setting LTE/5G NSA/5G SA bands for selected modems.
 Supported devices:
 - BroadMobi BM806U
 - Dell DW5821e Snapdragon X20 LTE (Foxconn T77W968)
+- Dell DW5821e-eSIM Snapdragon X20 LTE
 - Fibocom FG621-EA
 - Fibocom FM350-GL
 - Fibocom L850-GL
