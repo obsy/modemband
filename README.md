@@ -27,6 +27,7 @@ Supported devices:
 - Quectel EM12G-MSFT
 - Quectel EM160R-GL
 - Quectel EP06-E
+- Quectel RG500U-EB
 - Quectel RG500Q-EA
 - Quectel RG502Q-EA
 - Quectel RM500Q-GL
